@@ -4,3 +4,6 @@ scikit-learn
 xgboost
 matplotlib
 numpy
+Flask==2.0.1
+joblib==1.0.1
+scikit-learn==0.24.2

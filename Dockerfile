@@ -6,6 +6,8 @@ WORKDIR /app
 
 # Copy the requirements file
 COPY requirements.txt .
+COPY app.py .
+COPY ./model/modelo_DecisionTree.pkl modelo_DecisionTree.pkl
 
 # Install the dependencies
 RUN pip install --no-cache-dir -r requirements.txt

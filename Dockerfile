@@ -6,17 +6,16 @@ WORKDIR /app
 
 # Copy the requirements file
 COPY requirements.txt .
-COPY app.py .
-COPY ./model/modelo_DecisionTree.pkl modelo_DecisionTree.pkl
 
 # Install the dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the application code
-COPY . /app/
+# Copy the application code and model
+COPY app.py .
+COPY ./model/modelo_DecisionTree.pkl modelo_DecisionTree.pkl
 
-# Expose the port
-EXPOSE 8000
 
-# Run the command to start the development server
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+EXPOSE 5000
+
+# Run the command to start the Flask server
+CMD ["python", "app.py"]

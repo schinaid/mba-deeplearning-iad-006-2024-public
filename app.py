@@ -5,9 +5,9 @@ import numpy as np
 app = Flask(__name__)
 
 # Carregar o modelo treinado
-model = joblib.load('model/modelo_DecisionTree.pkl')
+model = joblib.load('./modelo_DecisionTree.pkl')
 
-@app.route('/predict', methods=['POST'])
+@app.route('/main', methods=['POST'])
 def main():
     # Obter os dados do JSON da solicitação
     data = request.json
@@ -19,4 +19,4 @@ def main():
     return jsonify({'prediction': int(prediction[0])})
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000)
+    app.run(host='0.0.0.0', port=5000)

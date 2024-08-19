@@ -1,22 +1,17 @@
 from flask import Flask, request, jsonify
-import joblib
-import numpy as np
+import pickle
 
 app = Flask(__name__)
 
 # Carregar o modelo treinado
-model = joblib.load('./modelo_DecisionTree.pkl')
+with open('./app/model/modelo_DecisionTree.pkl', 'rb') as f:
+    model = pickle.load(f)
 
 @app.route('/main', methods=['POST'])
 def main():
-    # Obter os dados do JSON da solicitação
     data = request.json
-    # Converter os dados para um array numpy
-    input_data = np.array(data['input']).reshape(1, -1)
-    # Fazer a predição
-    prediction = model.predict(input_data)
-    # Retornar a resposta como JSON
-    return jsonify({'prediction': int(prediction[0])})
+    prediction = model.predict([data['features']])
+    return jsonify({'prediction': prediction.tolist()})
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=8000, debug=True)
